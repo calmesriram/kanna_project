@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <br><br><br><br><br><br>
+      <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+      </button> -->
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel >Enter your name</ng-template>
+            <mat-form-field>
+              <mat-label> First Name</mat-label>
+              <input matInput placeholder="First name" minlength="5" formControlName="firstname" required>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-label> Last Name</mat-label>
+              <input matInput placeholder="Last name" minlength="5" formControlName="lastname" required>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your GST Detail</ng-template>
+            <mat-form-field>
+              <mat-label>GSTNO</mat-label>
+              <input matInput formControlName="gstno" minlength="15" placeholder="Enter GST Number" required>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button color="primary" matStepperNext (click)="getdetails();">Confrom</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>          
+          <mat-card>
+            <mat-card-title>
+              Details
+            </mat-card-title>
+            <mat-card-content>
+              <mat-label>First Name</mat-label>: <span>{{payload.firstname || ""}}</span><br>
+              <mat-label>Last Name</mat-label>: <span>{{payload.lastname || ""}}</span><br>
+              <mat-label>GST NO</mat-label>:<span>{{payload.gstno || ""}}</span><br>
+            </mat-card-content>
+          </mat-card>
+          <div>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+    </div>
+    <div class="col-sm-6"></div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
